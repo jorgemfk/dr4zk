@@ -212,13 +212,13 @@ public class DtoConverter {
             if (drBOField != null && !drBOField.isMedia()) {//TODO imepmentar para la media
                 if (drBOField.field().equals(DefaultValues.NONE)) {
                     System.out.println(field.getName() + " " + field.getType());
-                    ReflectionUtils.genericSet(instance, field.getName(), field.get(dto), field.getType());
+                    ReflectionUtils.genericSet(instance, field.getName(), field.get(dto));
                 } else {
                     fieldParams = drBOField.field().split("\\.");
                     compositeInstance = instance;
                     for (int i = 0; i < fieldParams.length; i++) {
                         if (i == fieldParams.length - 1) {
-                            ReflectionUtils.genericSet(compositeInstance, fieldParams[i], field.get(dto), field.getType());
+                            ReflectionUtils.genericSet(compositeInstance, fieldParams[i], field.get(dto));
                         } else {
                             compositeField = ReflectionUtils.getField(fieldParams[i], compositeInstance.getClass());
                             compositeTemp = compositeInstance;

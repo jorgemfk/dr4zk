@@ -55,9 +55,9 @@ public class DRMediaUtils {
 
     public static Object bulidBO(Media media, Class objClass) throws Exception{
     	Object attach = objClass.newInstance();
-    	ReflectionUtils.genericSet(attach, "name", media.getName(), String.class);
-    	ReflectionUtils.genericSet(attach, "format", media.getFormat().length()>4?media.getFormat().substring(media.getFormat().length()-3):media.getFormat(),String.class);
-    	ReflectionUtils.genericSet(attach, "contentType",media.getContentType(),String.class);
+    	ReflectionUtils.genericSet(attach, "name", media.getName());
+    	ReflectionUtils.genericSet(attach, "format", media.getFormat().length()>4?media.getFormat().substring(media.getFormat().length()-3):media.getFormat());
+    	ReflectionUtils.genericSet(attach, "contentType",media.getContentType());
     	return attach;
     }
 
