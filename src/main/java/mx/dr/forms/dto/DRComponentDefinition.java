@@ -27,7 +27,7 @@ import mx.dr.forms.view.DRRender;
 import mx.dr.forms.view.render.IDRRendereable;
 
 /**
- *
+ * DTO class that reads and encapsulates the elements necessary for the drawing of a component in the view.
  * </br>
  * Clase dto que lee y encapsula los elementos necesarios para el dibujado de un componente en la vista.
  * @version 1.0
@@ -36,19 +36,22 @@ import mx.dr.forms.view.render.IDRRendereable;
  */
 public class DRComponentDefinition {
     /**
+     * Custom annotation that defines the behavior of a component.
 	* Anotacion personalizada que define el comportamiento de un componente.
 	*
 	**/
     private Annotation drTag;
 	/**
+	 * A class that must be defined as a component screen painting.
 	* Clase que define como debe ser dibujado en pantalla un componente.
 	*
 	**/
     private Class<? extends IDRRendereable<? extends Annotation,? extends Object>>  renderable;
     /**
+     * Default constructor prevents the creation of objects outside this class.
 	* Constructor por defecto, previene la creacion de objetos fuera de esta clase.
-	* @param drTag anotacion personalizada del componente.
-	* @param renderable clase que pinta el componente
+	* @param drTag Custom annotation component. anotacion personalizada del componente.
+	* @param renderable painting component class. clase que pinta el componente
 	**/
     private DRComponentDefinition(Annotation drTag, Class<? extends IDRRendereable<? extends Annotation,? extends Object>>  renderable) {
         this.drTag = drTag;
@@ -56,7 +59,7 @@ public class DRComponentDefinition {
     }
     /**
 	* getter
-	* @return Anotacion personalizada que define el comportamiento de un componente.
+	* @return Custom annotation that defines the behavior of a component. Anotacion personalizada que define el comportamiento de un componente.
 	*
 	**/
     public Annotation getDrTag() {

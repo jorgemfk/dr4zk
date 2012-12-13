@@ -22,7 +22,7 @@
 package mx.dr.forms.constants;
 
 /**
- *
+ * <code> enum </ code> result defined as opening a link: popup, same page, new page.
  * </br></br>
  * <code>enum</code> que define como resultara la apertura de un enlace: popup, misma pagina, nueva pagina. 
  * @version 1.0

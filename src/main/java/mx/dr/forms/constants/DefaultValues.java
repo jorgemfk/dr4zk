@@ -22,7 +22,7 @@
 package mx.dr.forms.constants;
 
 /**
- *
+ * Class that defines the default values ​​used in the annotations of components.
  * </br></br>
  * Clase que define los valores por defecto utilizados en las anotaciones de componentes.
  * @version 1.0
@@ -32,28 +32,33 @@ package mx.dr.forms.constants;
  */
 public class DefaultValues {
     /**
+    * Costructor can not be instantiated.
 	* </br></br>
 	* Costructor que no permite crear instancias.
 	**/
     private DefaultValues(){}
 	/**
+	 * Default value for input type <code> String </ code>.
     * </br></br>
 	* Valor por defecto para las entradas tipo <code>String</code>.
 	**/
     public static final String NONE="";
 	/**
+	* Value indicating the limit not an integer value. 
 	* </br></br>
 	* Valor que indica el no limite de un valor entero.
 	**/
     public static final int NO_LIMIT = -1;
 	/**
+	* Value indicating the value of the default number of rows. 
 	* </br></br>
 	* Valor que indica el valor del numero de filas por defecto.
 	**/
     public static final int ONE_ROW = 1;
 	/**
+	 * A value that indicates the default format of the dates.
 	* </br></br>
-	* Valor que indica el fotmato por defecto de las fechas.
+	* Valor que indica el formato por defecto de las fechas.
 	**/
     public static final String DATE_FORMAT = "dd/MM/yyyy";
 

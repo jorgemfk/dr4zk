@@ -47,7 +47,7 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Window;
 
 /**
- *
+ * Abstract class that defines the behavior of the view based on the model class from view and the type of action requested.
  * </br></br>
  * Clase abstracta que determina el comportamiento de la vista basandose en la clase del modelo de la vista y el tipo de accion solicitada.
  * @version 1.0
@@ -56,19 +56,25 @@ import org.zkoss.zul.Window;
  */
 public abstract class DRGenericControllerAbstract extends GenericForwardComposer {
     /**
+     * Class that models the behavior of the light is passed as a parameter when invoking the screen.
+     * <br/>
 	* Clase que modela el comportamiento de la vista se pasa como parametro al momento de invocar la pantalla.
 	**/
     protected Class dtoClass;
 	/**
+	 * Name of the action that defines the behavior of the screen.
+	 * <br/>
 	* Nombre de la accion que define el comportamiento de la pantalla.
 	**/
     protected String action;
 	/**
+	* Parameter value to identify which record to update or read.
+	* <br/> 
 	* Valor del parametro para identificar que registro se va a actualizar o leer.
 	**/
     protected String param;
     /**
-	*
+	* Method that operates after composing the view here is used to dynamically build the view.
 	* Metodo que opera despues de componer la vista, aqui se usa para construir de forma dinamica la vista.
 	* @see org.zkoss.ui.util.GenericForwardComposer#doAfterCompose
 	**/
@@ -114,10 +120,11 @@ public abstract class DRGenericControllerAbstract extends GenericForwardComposer
         DRFormBuilder.buildForm(comp, dtoClass, dto, action, comp);
     }
     /**
+     * Method searches the register required to read or update.
 	* Metodo busca el registro requerido para leer o actualizar.
-	* @param param Valor del parametro para encontrar el registro deseado, generalmente es un valor unico en la base de datos.
-	* @param dtoClass Clase que representa 
-	* @return Objeto encontrado mediante el parametro otorgado.
+	* @param param Parameter value to find the desired record, usually a single value in the database / Valor del parametro para encontrar el registro deseado, generalmente es un valor unico en la base de datos.
+	* @param dtoClass Class representing / Clase que representa 
+	* @return Found object using the given parameter. Objeto encontrado mediante el parametro otorgado.
 	**/
     protected Object findSuchObject(String param, Class dtoClass, DRFellowLink drAction) throws Exception {
         DRRootEntity drEntity = (DRRootEntity) dtoClass.getAnnotation(DRRootEntity.class);
@@ -139,7 +146,7 @@ public abstract class DRGenericControllerAbstract extends GenericForwardComposer
     }
 
 	/**
-	*
+	* Generates a new word in the captcha
 	*Genera una nueva palabra en el captcha
 	*@param event Evento generado al oprimir el boton de recaptcha
 	**/
@@ -153,6 +160,8 @@ public abstract class DRGenericControllerAbstract extends GenericForwardComposer
     }
     
 	/**
+	 * Method that executes a low generic search <code> onClick event </ code>, the <code> id </ code> Component (eg button) must be called <code> search </ code>, this assignment must done in <code> zul </ code> that will contain the component
+	 * <br/>
 	* Metodo que ejecuta una busqueda generica bajo el evento <code>onClick</code>, el <code>id</code> del Componente (ej. boton) debe ser llamado <code>search</code>, esta asignacion debe hacerse en el <code>zul</code> que contendra dicho componente.
 	*
 	**/
@@ -174,7 +183,9 @@ public abstract class DRGenericControllerAbstract extends GenericForwardComposer
         }
     }
     /**
-	* Metodo que implementa un llamado general a la accion de crear o actualizar un regristro.
+     * Method that implements a general call to action to create or update a record.
+     * <br/>
+	* Metodo que implementa un llamado general a la accion de crear o actualizar un registro.
 	* @deprecated use <code>onClick$generalAction</code> 
 	**/
     public void onClick$save() throws WrongValuesException, WrongValueException {
@@ -224,6 +235,9 @@ public abstract class DRGenericControllerAbstract extends GenericForwardComposer
 
     }
     /**
+     * Method of action its main purpose is to validate fields capture and delivery to the programmer as its valued <code> dto</code> .
+     * You should implement the <code> zul </code> under <code> generalAction id </code> in the desired component.
+	* <br/>
 	* Metodo de accion general su principal proposito es la validacion de los campos de captura y su entrega al programador en forma de su <code>dto<code/> valuado.
 	* Se debe implementar en el <code>zul</code> bajo el <code>id generalAction</code> en el componente deseado.
 	**/
@@ -258,9 +272,11 @@ public abstract class DRGenericControllerAbstract extends GenericForwardComposer
 
     }
     /**
+     * Method to run a custom operation.
+     * <br/>
 	* Metodo para ejecutar una operacion personalizada.
-	* @param o Objeto <code>dto</code> valuado con los valores introducidos por el usuario previamente ya validados
-	* @throws Exception si ocurre algun error.
+	* @param o Objeto <code> DTO</code> valued with values ​​previously entered by the user and validated / <code>dto</code> valuado con los valores introducidos por el usuario previamente ya validados
+	* @throws Exception If an error occurs / si ocurre algun error.
 	**/
     protected abstract void doSomething(Object o) throws Exception;
 }

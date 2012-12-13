@@ -22,7 +22,7 @@
 package mx.dr.forms.dto;
 
 /**
- *
+ * Interface that determines the minimum elements that must have required an object class is used to upload files to the application
  * </br>
  * Interfase que determina los elementos minimos necesarios que debe tener una clase de objeto que se use para cargar archivos en la aplicacion.
  * @version 1.0
@@ -31,23 +31,27 @@ package mx.dr.forms.dto;
  */
 public interface DRAttachMedia {
 /**
+ * Is getter original name of the file.
  * Es el getter del nombre original del del archivo.
  * @return original file name / nombre original del archivo.
  **/
 public String getName();
 /**
+ * Is getter of the file extension.
  * Es el getter de la extension del archivo.
  * @return format or file extention / formato o extension del archivo.
  **/
 public String getFormat();
 /**
+ * the getter mime type of the file.
  * Es el getter del tipo mime del archivo.
  * @return MimeType
  **/
 public String getContentType();
 /**
+ * Is getter of the uri of obtaining the file.
  * Es el getter de la uri de la obtencion del archivo.
- * @return Uri desde la cual se podra recuperar el archivo cuando ya ha sido cargado y guardado correctamente.
+ * @return Uri from which you can retrieve the file once it has been loaded and stored correctly / Uri desde la cual se podra recuperar el archivo cuando ya ha sido cargado y guardado correctamente.
  **/
 public String getUri();
 }

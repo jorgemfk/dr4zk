@@ -22,7 +22,7 @@
 package mx.dr.forms.constants;
 
 /**
- *
+ * <code> Enum </ code> that defines the types of behaviors that can be handled in the view: create, update, read, search, list.
  * </br></br>
  * <code>enum</code> que define los tipos de comportamientos que se pueden manejar en la vista: crear, actualizar, leer, buscar, lista. 
  * @version 1.0
@@ -32,10 +32,10 @@ package mx.dr.forms.constants;
 public enum FormActions {
     ADD,EDIT,READ,SEARCH,LIST;
 	/**
-	*
+	* Method that finds the enumeration value for the given name.
 	* Metodo que encuentra el valor de la enumeracion para el nombre dado.
-	* @param action - Nombre de la accion contenida en la enumeracion.
-	* @return Valor de la enumeracion encontrada.
+	* @param action Name of the action contained in the enumeration./ Nombre de la accion contenida en la enumeracion.
+	* @return Enumeration value found / Valor de la enumeracion encontrada.
 	**/
     public static FormActions getValue(String action){
         for(FormActions aenum : FormActions.values()){

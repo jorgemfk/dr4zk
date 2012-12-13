@@ -36,7 +36,7 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
 /**
- *
+ * Class defines the general behavior to perform the action of creating or updating.
  * </br>
  * Clase que define el comportamiento general al realizar la accion de crear o actualizar.
  * @version 1.0
@@ -45,9 +45,10 @@ import org.zkoss.zul.Window;
  */
 public class DRGenericController extends DRGenericControllerAbstract {
 	/**
-	 *
+	 * Method that implements the generic behavior of an action to create or update.
+	 * <br/>
 	 * Metodo que implementa el comportamiento generico de una accion de crear o actualizar.
-	 * @see mx.dr.forms.DRGenericController#doSomething
+	 * @see mx.dr.forms.controller.DRGenericControllerAbstract#doSomething(Object)
 	 **/
     protected void doSomething(Object o) throws Exception {
         GenericDtoIN dtoIN = DtoConverter.convert(o);
