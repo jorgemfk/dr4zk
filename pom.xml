@@ -14,6 +14,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<org.zkoss.zk.version>6.5.1</org.zkoss.zk.version>
 	</properties>
 
 	<repositories>
@@ -31,22 +32,22 @@
 		<dependency>
 			<groupId>org.zkoss.zk</groupId>
 			<artifactId>zkmax</artifactId>
-			<version>6.0.1</version>
+			<version>${org.zkoss.zk.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.zkoss.zk</groupId>
 			<artifactId>zkplus</artifactId>
-			<version>6.0.1</version>
+			<version>${org.zkoss.zk.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.zkoss.zk</groupId>
 			<artifactId>zhtml</artifactId>
-			<version>6.0.1</version>
+			<version>${org.zkoss.zk.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.zkoss.zk</groupId>
 			<artifactId>zkbind</artifactId>
-			<version>6.0.1</version>
+			<version>${org.zkoss.zk.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
