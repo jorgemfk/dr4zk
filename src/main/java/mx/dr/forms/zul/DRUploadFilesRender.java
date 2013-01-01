@@ -34,6 +34,7 @@ import org.zkoss.zk.ui.Components;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Fileupload;
 import org.zkoss.zul.Grid;
@@ -100,7 +101,8 @@ public class DRUploadFilesRender implements ListitemRenderer, Serializable {
             final Component parent) throws Exception {
         Toolbarbutton button = new Toolbarbutton();
         button.setSclass(Labels.getLabel("dr.forms.css.class.upload.upload"));
-        button.addEventListener(Events.ON_CLICK, new EventListener() {
+        button.setUpload("true,maxsize=300");
+        button.addEventListener(Events.ON_UPLOAD, new EventListener() {
 
             public boolean isAsap() {
                 return false;
@@ -111,7 +113,7 @@ public class DRUploadFilesRender implements ListitemRenderer, Serializable {
 
                 Media media = null;
 
-                media = Fileupload.get();
+                media = ((UploadEvent)event).getMedia();//Fileupload.get();
 
                 if (media != null) {
                     System.out.println(media.getName() + " " + media.getFormat() + " " + media.getContentType());
@@ -145,7 +147,7 @@ public class DRUploadFilesRender implements ListitemRenderer, Serializable {
                     }
 
                 } else if (media == null) {
-                    Messagebox.show("Nada que cargar: " + media, "Error", Messagebox.OK, Messagebox.ERROR);
+                    Messagebox.show("No se cargo la imagen " , "Error", Messagebox.OK, Messagebox.ERROR);
                 }
 
             }
