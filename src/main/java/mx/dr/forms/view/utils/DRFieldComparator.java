@@ -55,7 +55,7 @@ public class DRFieldComparator implements Comparator<DRFieldDto> {
 	**/
     public int compare(DRFieldDto d1, DRFieldDto d2) {
         DRField drfield1= d1.getDrField();
-        DRField drfield2= d1.getDrField();
+        DRField drfield2= d2.getDrField();
         Field o1 = d1.getField();
         Field o2 = d2.getField();
         o1.setAccessible(true);
