@@ -86,7 +86,10 @@ public abstract class DRGenericControllerAbstract extends GenericForwardComposer
 
         System.out.println(dtoClassName);
         System.out.println(action);
-
+        //default action value
+        if(action==null){
+        	action = FormActions.ADD.name();
+        }
         dtoClass = Class.forName(dtoClassName);
 
 
