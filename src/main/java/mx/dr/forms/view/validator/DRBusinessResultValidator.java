@@ -40,14 +40,14 @@ public class DRBusinessResultValidator implements IDRValidator<DRValidateBusines
             return null;
         }
 
-        if (value == null) {
+        if (dtoValue == null) {
             return null;
         }
 
         String[] invokerArray = drInput.action().split("@");
         Class objectInvoker = Class.forName(invokerArray[0]);
         Object facade = objectInvoker.newInstance();
-        boolean res = (Boolean) objectInvoker.getMethod(invokerArray[1], value.getClass()).invoke(facade, value);
+        boolean res = (Boolean) objectInvoker.getMethod(invokerArray[1], dtoValue.getClass()).invoke(facade, dtoValue);
         System.out.println(res);
         Object[] param = {value};
         String msg = Labels.getLabel("dr.forms.label.empty.result", param);
