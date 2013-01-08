@@ -80,12 +80,12 @@ public class DRFormBuilder {
 	/**
 	* comparador para ordenar los atributos definidos como accion CREATE.
 	*/
-    private static Comparator ADD_COMPARATOR = new DRFieldComparator(FormActions.ADD);
+    private static Comparator COMPARATOR = new DRFieldComparator();
 	
     private static Map<String, List<DRFieldDto>> EDIT_MAP = new HashMap<String, List<DRFieldDto>>();
-    private static Comparator EDIT_COMPARATOR = new DRFieldComparator(FormActions.EDIT);
+    //private static Comparator EDIT_COMPARATOR = new DRFieldComparator(FormActions.EDIT);
     private static Map<String, List<DRFieldDto>> SEARCH_MAP = new HashMap<String, List<DRFieldDto>>();
-    private static Comparator SEARCH_COMPARATOR = new DRFieldComparator(FormActions.SEARCH);
+    //private static Comparator SEARCH_COMPARATOR = new DRFieldComparator(FormActions.SEARCH);
     private static Map<String, List<DRFieldDto>> READ_MAP = new HashMap<String, List<DRFieldDto>>();
     /**
 	* constructor que previene de ser instanciado
@@ -410,20 +410,24 @@ public class DRFormBuilder {
 	**/
     public static List<DRFieldDto> getDRFields(Class dtoClass, FormActions action) {
         Map<String, List<DRFieldDto>> map = null;
-        Comparator<DRFieldDto> comparator = null;
+        Comparator<DRFieldDto> comparator = COMPARATOR;
         switch (action) {
             case ADD:
                 map = ADD_MAP;
-                comparator = ADD_COMPARATOR;
+                //comparator = ADD_COMPARATOR;
                 break;
             case EDIT:
                 map = EDIT_MAP;
-                comparator = EDIT_COMPARATOR;
+                //comparator = EDIT_COMPARATOR;
                 break;
             case SEARCH:
                 map = SEARCH_MAP;
-                comparator = SEARCH_COMPARATOR;
+                //comparator = SEARCH_COMPARATOR;
                 break;
+            case READ:
+                map = READ_MAP;
+                //comparator = SEARCH_COMPARATOR;
+                break;    
         }
         List<DRFieldDto> results = map.get(dtoClass.getName());
         if (results == null) {

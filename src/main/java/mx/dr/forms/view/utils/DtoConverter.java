@@ -59,7 +59,7 @@ public class DtoConverter {
     private DtoConverter() {
     }
     private static Map<String, List<DRFieldDto>> FIELD_LIST_MAP = new HashMap<String, List<DRFieldDto>>();
-    private static Comparator FIELD_LIST_COMPARATOR = new DRFieldComparator(FormActions.LIST);
+    private static Comparator COMPARATOR = new DRFieldComparator();
 
     public static List<DRFieldDto> getListFields(Class dtoClass) {
         List<DRFieldDto> results = FIELD_LIST_MAP.get(dtoClass.getName());
@@ -73,7 +73,7 @@ public class DtoConverter {
                     results.add(new DRFieldDto(field, listField));
                 }
             }
-            Collections.sort(results, FIELD_LIST_COMPARATOR);
+            Collections.sort(results, COMPARATOR);
             FIELD_LIST_MAP.put(dtoClass.getName(), results);
         }
         return results;
@@ -217,8 +217,12 @@ public class DtoConverter {
         Field compositeField;
         for (Field field : dto.getClass().getDeclaredFields()) {
             field.setAccessible(true);
+            
 
-            if (field.getAnnotation(DRIsMedia.class) == null) {//TODO imepmentar para la media
+            drAddField = DRGeneralViewUtils.readAnnotation(field, FormActions.ADD);
+            drEditField = DRGeneralViewUtils.readAnnotation(field, FormActions.EDIT);
+            
+            if (field.getAnnotation(DRIsMedia.class) == null && ((drAddField != null && drAddField.isField()) || (drEditField != null && drEditField.isField()))) {//TODO imepmentar para la media
                 if (!field.getName().contains(TOKEN)) {
                     System.out.println(field.getName() + " " + field.getType());
                     try {
@@ -254,11 +258,11 @@ public class DtoConverter {
                     }
                 }
             } else {
-                drAddField = DRGeneralViewUtils.readAnnotation(field, FormActions.ADD);
-                drEditField = DRGeneralViewUtils.readAnnotation(field, FormActions.EDIT);
-                if ((drAddField != null && !drAddField.isField()) || (drEditField != null && !drEditField.isField())) {
+                //drAddField = DRGeneralViewUtils.readAnnotation(field, FormActions.ADD);
+                //drEditField = DRGeneralViewUtils.readAnnotation(field, FormActions.EDIT);
+                //if ((drAddField != null && !drAddField.isField()) || (drEditField != null && !drEditField.isField())) {
                     buildBO(field.get(dto), list, instance, forceCurrent);
-                }
+                //}
             }
         }
     }

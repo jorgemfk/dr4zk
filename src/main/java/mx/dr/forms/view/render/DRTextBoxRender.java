@@ -54,7 +54,6 @@ public class DRTextBoxRender implements IDRRendereable<DRTextBox,String> {
         }
         atext.setId(name);
         Div div=null; 
- 
         if(!drInputText.mask().equals(DefaultValues.NONE)){
             div =  new Div();
             div.appendChild(atext);

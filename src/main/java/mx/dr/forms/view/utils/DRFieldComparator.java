@@ -38,17 +38,17 @@ import mx.dr.forms.view.DRField;
  * @since v0.5
  */
 public class DRFieldComparator implements Comparator<DRFieldDto> {
-    /**
+    /*
 	* accion a la que pertenecen los atributos.
-	**/
+	**
     private FormActions action;
-    /**
+    **
 	* constructor por defecto.
 	 * @param action  accion a la que pertenecen los atributos.
-	**/
+	**
     public DRFieldComparator(FormActions action) {
         this.action = action;
-    }
+    }*/
     /**
 	* compara el orden introducidos por el usuario.
 	* @see java.util.Comparator#compare

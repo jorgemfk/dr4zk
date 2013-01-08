@@ -87,6 +87,8 @@ public class DRGenericController extends DRGenericControllerAbstract {
         }
         Class modelInvoker = Class.forName(invokerArray[0]);
         Object facade = modelInvoker.newInstance();
+        
+        System.out.println(dtoIN.getBos().get(0));
         modelInvoker.getMethod(invokerArray[1], GenericDtoIN.class).invoke(facade, dtoIN);
 
         if (msg != null && msg.label() != null && msg.mold().equals(DRMessage.Mold.POPUP)) {

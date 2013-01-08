@@ -82,7 +82,7 @@ public class DRCaptchaRender implements IDRRendereable<DRCaptcha,Object> {
     }
 
     public Object value(DRCaptcha drInput, Component comp, Class<Object> expectedType) throws Exception {
-        return ((Captcha)comp).getValue();
+        return ((Textbox)comp).getValue();
     }
 
     
