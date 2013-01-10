@@ -291,6 +291,8 @@ public class DRFormBuilder {
                     GenericDtoIN dtoIn = new GenericDtoIN();
                     dtoIn.setSessionParams(DRGeneralViewUtils.buildMapSessionParams(drSearchAction.sessionParams(),
                             origin.getDesktop().getSession().getAttributes()));
+                    dtoIn.setViewDTO(dtoClass.newInstance());
+                    System.out.println("val: "+ dtoIn.getViewDTO());
                     DRGeneralViewUtils.fillListModel(drSearchAction, alist, dtoIn, origin);
                 }
             }

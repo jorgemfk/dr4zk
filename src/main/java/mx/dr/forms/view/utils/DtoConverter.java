@@ -209,6 +209,7 @@ public class DtoConverter {
 
         DRField drAddField;
         DRField drEditField;
+        DRField drSearchField;
 
         String[] fieldParams;
 
@@ -221,8 +222,9 @@ public class DtoConverter {
 
             drAddField = DRGeneralViewUtils.readAnnotation(field, FormActions.ADD);
             drEditField = DRGeneralViewUtils.readAnnotation(field, FormActions.EDIT);
+            drSearchField = DRGeneralViewUtils.readAnnotation(field, FormActions.SEARCH);
             
-            if (field.getAnnotation(DRIsMedia.class) == null && ((drAddField != null && drAddField.isField()) || (drEditField != null && drEditField.isField()))) {//TODO imepmentar para la media
+            if (field.getAnnotation(DRIsMedia.class) == null && ((drAddField != null && drAddField.isField()) || (drEditField != null && drEditField.isField())  || (drSearchField != null && drSearchField.isField()))) {//TODO imepmentar para la media
                 if (!field.getName().contains(TOKEN)) {
                     System.out.println(field.getName() + " " + field.getType());
                     try {

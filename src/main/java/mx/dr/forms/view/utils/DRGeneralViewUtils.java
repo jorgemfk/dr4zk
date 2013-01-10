@@ -88,6 +88,7 @@ public class DRGeneralViewUtils {
         String[] invokerArray = drSearchAction.submitAction().split("@");
         Class modelInvoker = Class.forName(invokerArray[0]);
         Object facade = modelInvoker.newInstance();
+        System.out.println("in: "+ dtoIn.getViewDTO());
         List results = DtoConverter.buildResults((List) modelInvoker.getMethod(invokerArray[1], GenericDtoIN.class).invoke(facade, dtoIn), drSearchAction.resultsComponent().dtoResult());
         if (results.isEmpty()) {
             alist.setVisible(false);
