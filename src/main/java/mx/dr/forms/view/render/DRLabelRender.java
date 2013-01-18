@@ -32,19 +32,23 @@ import org.zkoss.zul.Label;
  *
  * @author jorge
  */
-public class DRLabelRender implements IDRRendereable<DRLabel,String> {
+public class DRLabelRender implements IDRRendereable<DRLabel,Object> {
     
     
-    public Component render(final DRLabel drLabel,final String name,final String value,final Object dtoValue)throws Exception {
-       
-        Label label = new Label(Labels.getLabel(drLabel.key()));
+    public Component render(final DRLabel drLabel,final String name,final Object value,final Object dtoValue)throws Exception {
+    	Label label;
+    	if(value!=null){
+    		label = new Label(value.toString());	
+        }else{
+            label = new Label(Labels.getLabel(drLabel.key()));
+        }
         if (!drLabel.sclass().equals(DefaultValues.NONE)) {
             label.setZclass(drLabel.sclass());
         }
         return label;
     }
 
-    public Object value(final DRLabel drLabel, final Component comp, final Class<String> expectedType) {
+    public Object value(final DRLabel drLabel, final Component comp, final Class<Object> expectedType) {
         return null;
     }
 

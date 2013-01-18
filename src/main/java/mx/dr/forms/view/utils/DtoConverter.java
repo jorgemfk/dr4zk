@@ -207,63 +207,69 @@ public class DtoConverter {
             return;
         }
 
-        DRField drAddField;
-        DRField drEditField;
-        DRField drSearchField;
+        DRField drField;
 
         String[] fieldParams;
 
         Object compositeInstance;
         Object compositeTemp;
         Field compositeField;
+        boolean isField=false;
         for (Field field : dto.getClass().getDeclaredFields()) {
-            field.setAccessible(true);
-            
+        	field.setAccessible(true);
 
-            drAddField = DRGeneralViewUtils.readAnnotation(field, FormActions.ADD);
-            drEditField = DRGeneralViewUtils.readAnnotation(field, FormActions.EDIT);
-            drSearchField = DRGeneralViewUtils.readAnnotation(field, FormActions.SEARCH);
-            
-            if (field.getAnnotation(DRIsMedia.class) == null && ((drAddField != null && drAddField.isField()) || (drEditField != null && drEditField.isField())  || (drSearchField != null && drSearchField.isField()))) {//TODO imepmentar para la media
-                if (!field.getName().contains(TOKEN)) {
-                    System.out.println(field.getName() + " " + field.getType());
-                    try {
-                        ReflectionUtils.genericSet(instance, field.getName(), field.get(dto));
-                    } catch (NoSuchMethodException e) {
-                        System.err.println("THIS METHOD HASNT SETTED: " + e.getMessage());
-                    }
-                } else {
-                    fieldParams = field.getName().split(STOKEN);
-                    compositeInstance = instance;
-                    for (int i = 0; i < fieldParams.length; i++) {
-                        if (i == fieldParams.length - 1) {
-                            try {
-                                ReflectionUtils.genericSet(compositeInstance, fieldParams[i], field.get(dto));
-                            } catch (NoSuchMethodException e) {
-                                System.err.println("THIS METHOD HASNT SETTED: " + e.getMessage());
-                            }
-                        } else {
-                            compositeField = ReflectionUtils.getField(fieldParams[i], compositeInstance.getClass());
-                            compositeTemp = compositeInstance;
-                            try {
-                                compositeInstance = ReflectionUtils.genericGet(compositeInstance, fieldParams[i]);
-                            } catch (NoSuchMethodException e) {
 
-                                System.err.println("THIS METHOD HASNT GETTED: " + e.getMessage());
-                                break;
-                            }
-                            if (compositeInstance == null) {
-                                compositeInstance = compositeField.getType().newInstance();
-                                compositeField.set(compositeTemp, compositeInstance);
-                            }
-                        }
-                    }
-                }
-            } else {
-                //drAddField = DRGeneralViewUtils.readAnnotation(field, FormActions.ADD);
-                //drEditField = DRGeneralViewUtils.readAnnotation(field, FormActions.EDIT);
-                //if ((drAddField != null && !drAddField.isField()) || (drEditField != null && !drEditField.isField())) {
-                    buildBO(field.get(dto), list, instance, forceCurrent);
+        	drField = DRGeneralViewUtils.readAnnotation(field, FormActions.ADD);
+        	if(drField==null)
+        		drField = DRGeneralViewUtils.readAnnotation(field, FormActions.EDIT);
+        	if(drField==null)
+        		drField = DRGeneralViewUtils.readAnnotation(field, FormActions.SEARCH);
+        	isField=drField != null && drField.isField();
+        	if (field.getAnnotation(DRIsMedia.class) == null && isField) {//TODO imepmentar para la media
+        		if (!field.getName().contains(TOKEN)) {
+        			System.out.println(field.getName() + " " + field.getType());
+        			try {
+        				ReflectionUtils.genericSet(instance, field.getName(), field.get(dto));
+        			} catch (NoSuchMethodException e) {
+        				System.err.println("THIS METHOD HASNT SETTED: " + e.getMessage());
+        			}
+        		} else {
+        			fieldParams = field.getName().split(STOKEN);
+        			compositeInstance = instance;
+        			for (int i = 0; i < fieldParams.length; i++) {
+        				if (i == fieldParams.length - 1) {
+        					try {
+        						ReflectionUtils.genericSet(compositeInstance, fieldParams[i], field.get(dto));
+        					} catch (NoSuchMethodException e) {
+        						System.err.println("THIS METHOD HASNT SETTED: " + e.getMessage());
+        					}
+        				} else {
+        					compositeField = ReflectionUtils.getField(fieldParams[i], compositeInstance.getClass());
+        					compositeTemp = compositeInstance;
+        					try {
+        						compositeInstance = ReflectionUtils.genericGet(compositeInstance, fieldParams[i]);
+        					} catch (NoSuchMethodException e) {
+
+        						System.err.println("THIS METHOD HASNT GETTED: " + e.getMessage());
+        						break;
+        					}
+        					if (compositeInstance == null) {
+        						compositeInstance = compositeField.getType().newInstance();
+        						compositeField.set(compositeTemp, compositeInstance);
+        					}
+        				}
+        			}
+        		}
+        	} else {
+        		//drAddField = DRGeneralViewUtils.readAnnotation(field, FormActions.ADD);
+        		//drEditField = DRGeneralViewUtils.readAnnotation(field, FormActions.EDIT);
+        		//if ((drAddField != null && !drAddField.isField()) || (drEditField != null && !drEditField.isField())) {
+        		if(!isField){
+        			System.out.print("inner name: "+ field.getName());
+        			System.out.print(" inner class: "+ field.getType());
+        			System.out.println(" inner value: "+ field.get(dto));
+        			buildBO(field.get(dto), list, instance, forceCurrent);
+        		}
                 //}
             }
         }

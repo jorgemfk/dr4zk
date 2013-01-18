@@ -203,7 +203,7 @@ public class DRUploadFilesRender implements ListitemRenderer, Serializable {
 
             }
         });
-        //button.setLabel(Labels.getLabel("dr.forms.label.delete"));
+        button.setLabel(Labels.getLabel("dr.forms.label.delete"));
         button.setParent(parent);
         return button;
     }
