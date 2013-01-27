@@ -214,7 +214,6 @@ public class DtoConverter {
         Object compositeInstance;
         Object compositeTemp;
         Field compositeField;
-        boolean isField=false;
         for (Field field : dto.getClass().getDeclaredFields()) {
         	field.setAccessible(true);
 
@@ -224,8 +223,10 @@ public class DtoConverter {
         		drField = DRGeneralViewUtils.readAnnotation(field, FormActions.EDIT);
         	if(drField==null)
         		drField = DRGeneralViewUtils.readAnnotation(field, FormActions.SEARCH);
-        	isField=drField != null && drField.isField();
-        	if (field.getAnnotation(DRIsMedia.class) == null && isField) {//TODO imepmentar para la media
+        	if(drField==null)
+        		drField = DRGeneralViewUtils.readAnnotation(field, FormActions.READ);
+
+        	if (field.getAnnotation(DRIsMedia.class) == null && drField != null && drField.isField()) {//TODO imepmentar para la media
         		if (!field.getName().contains(TOKEN)) {
         			System.out.println(field.getName() + " " + field.getType());
         			try {
@@ -245,6 +246,9 @@ public class DtoConverter {
         					}
         				} else {
         					compositeField = ReflectionUtils.getField(fieldParams[i], compositeInstance.getClass());
+        					if(compositeField==null){
+        						break;
+        					}
         					compositeTemp = compositeInstance;
         					try {
         						compositeInstance = ReflectionUtils.genericGet(compositeInstance, fieldParams[i]);
@@ -253,7 +257,9 @@ public class DtoConverter {
         						System.err.println("THIS METHOD HASNT GETTED: " + e.getMessage());
         						break;
         					}
-        					if (compositeInstance == null) {
+        					if (compositeInstance == null ) {
+        						System.out.print(fieldParams[i]);
+        						System.out.println(" composite: "+compositeField);
         						compositeInstance = compositeField.getType().newInstance();
         						compositeField.set(compositeTemp, compositeInstance);
         					}
@@ -264,7 +270,7 @@ public class DtoConverter {
         		//drAddField = DRGeneralViewUtils.readAnnotation(field, FormActions.ADD);
         		//drEditField = DRGeneralViewUtils.readAnnotation(field, FormActions.EDIT);
         		//if ((drAddField != null && !drAddField.isField()) || (drEditField != null && !drEditField.isField())) {
-        		if(!isField){
+        		if(drField != null && !drField.isField()){
         			System.out.print("inner name: "+ field.getName());
         			System.out.print(" inner class: "+ field.getType());
         			System.out.println(" inner value: "+ field.get(dto));

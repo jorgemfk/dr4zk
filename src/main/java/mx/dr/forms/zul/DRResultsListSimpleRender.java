@@ -48,27 +48,27 @@ public class DRResultsListSimpleRender implements ListitemRenderer,Serializable 
 	 **/
 	public void render(Listitem item, Object data) throws Exception {
 		
-			Listcell cell = null;
-			cell = new Listcell();
-			// The id of the media
-                        DRField drListField;
-                        Object dum;
-			for(Field field:data.getClass().getDeclaredFields()){
-                               field.setAccessible(true);
-                               drListField =  DRGeneralViewUtils.readAnnotation(field, FormActions.LIST);
-                               if(drListField!=null){
-			       cell = new Listcell();
-			       cell.setParent(item);
-                               dum = ReflectionUtils.genericGet(data, field.getName());// field.get(data);
-			       cell.setLabel(dum == null?" ":dum.toString());
-                               }
+		Listcell cell = null;
+		cell = new Listcell();
+		// The id of the media
+		DRField drListField;
+		Object dum;
+		for(Field field:data.getClass().getDeclaredFields()){
+			field.setAccessible(true);
+			drListField =  DRGeneralViewUtils.readAnnotation(field, FormActions.LIST);
+			if(drListField!=null){
+				cell = new Listcell();
+				cell.setParent(item);
+				dum = ReflectionUtils.genericGet(data, field.getName());// field.get(data);
+				cell.setLabel(dum == null?" ":dum.toString());
 			}
-
-		
-	}
-	
-	 public void render(Listitem arg0, Object arg1, int arg2) throws Exception {
-			render(arg0, arg1);
 		}
+
+
+	}
+
+	public void render(Listitem arg0, Object arg1, int arg2) throws Exception {
+		render(arg0, arg1);
+	}
 
 }

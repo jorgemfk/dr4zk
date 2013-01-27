@@ -77,7 +77,11 @@ public class DRTextBoxRender implements IDRRendereable<DRTextBox,String> {
     public Object value(final DRTextBox drInputText,final Component comp,final Class<String> expectedType) {
  
         if(comp instanceof Textbox){
-            return ((Textbox) comp).getValue();
+        	if(drInputText.uppercase()){
+        		return ((Textbox) comp).getValue().toUpperCase();
+        	}else{
+        		return ((Textbox) comp).getValue();
+        	}
         }
             
         return null;   
