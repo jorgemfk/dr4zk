@@ -31,6 +31,14 @@ package mx.dr.forms.view.utils;
  * @since v0.5
  */
 public interface DRBOFieldTranslator {
+	/**
+	 * get the attribute name where is applicable the source type
+	 * @return the field name
+	 */
     public String getFieldName();
+    /**
+     * get the value to assign at field name
+     * @return the value
+     */
     public Object getFieldValue();
 }

@@ -319,7 +319,8 @@ public class DRFormBuilder {
                 }
 
                 if (renderable != null) {
-                    parent.appendChild(renderable.newInstance().render(drComponent, field.getName(), dtoValue == null ? null : field.get(dtoValue), dtoValue));
+                	System.out.println(((Annotation)drComponent).annotationType());
+                    parent.appendChild(renderable.newInstance().render((Annotation)drComponent, field.getName(), dtoValue == null ? null : field.get(dtoValue), dtoValue));
                 } else {
                     buildForm(comp, field.getType(), dtoValue == null ? null : field.get(dtoValue), action, origin);
                 }
@@ -388,16 +389,18 @@ public class DRFormBuilder {
             }
             Tabpanel atab = new Tabpanel();
             if (drGroupBox != null) {
-                addGroupBox(drGroupBox, atab, field.getType(), action, origin, dtoValue == null ? null : field.get(dtoValue));
+                addGroupBox(drGroupBox, atab, field.getType(), action, origin, dtoValue == null ? null : field.get(dtoValue),drField.label());
             } else {
                 buildForm(atab, field.getType(), dtoValue == null ? null : field.get(dtoValue), action, origin);
             }
             tabbox.getTabpanels().appendChild(atab);
         } else if (drGroupBox != null) {
             if (grid != null) {
-                addGroupBox(drGroupBox, grid, field.getType(), action, origin, dtoValue == null ? null : field.get(dtoValue));
+                addGroupBox(drGroupBox, arow, field.getType(), action, origin, dtoValue == null ? null : field.get(dtoValue),drField.label());
+                arow = getRow(arow, grid.getRows(), itCols, cols);
+                itCols = getCols(itCols, cols);
             } else {
-                addGroupBox(drGroupBox, comp, field.getType(), action, origin, dtoValue == null ? null : field.get(dtoValue));
+                addGroupBox(drGroupBox, comp, field.getType(), action, origin, dtoValue == null ? null : field.get(dtoValue),drField.label());
             }
         } else {
             buildForm(grid, field.getType(), dtoValue == null ? null : field.get(dtoValue), action, origin);
@@ -475,16 +478,17 @@ public class DRFormBuilder {
 	 * @param comp componente dentro del cual se construira la vista.
 	 * @param dtoValue objeto valuado que define los valores iniciales de los componentes.
 	 * @param action accion que define el comportamiento de la vista.
+	 * @param label etiqueta
 	 */
-    private static void addGroupBox(DRGroupBox drGroupBox, Component parent, Class dtoClass, String action, Component comp, Object dtoValue) throws Exception {
+    private static void addGroupBox(DRGroupBox drGroupBox, Component parent, Class dtoClass, String action, Component comp, Object dtoValue,DRLabel label) throws Exception {
         Groupbox group = new Groupbox();
         group.setMold(drGroupBox.mold().name().toLowerCase().replaceAll("_", ""));
         group.setWidth(drGroupBox.width());
         group.setOpen(drGroupBox.open());
         buildForm(group, dtoClass, dtoValue, action, comp);
 
-        if (!drGroupBox.label().key().equals(DRLabel.NO_LABEL)) {
-            group.getChildren().add(0, new Caption(Labels.getLabel(drGroupBox.label().key())));
+        if (!label.key().equals(DRLabel.NO_LABEL)) {
+            group.getChildren().add(0, new Caption(Labels.getLabel(label.key())));
         }
 
         parent.getChildren().add(0, group);

@@ -70,7 +70,7 @@ public class DRGenericController extends DRGenericControllerAbstract {
 			componentPath = drAddAction.componentPath();
 
 			dtoIN.setSessionParams(DRGeneralViewUtils.buildMapSessionParams(drAddAction.sessionParams(), sessionScope));
-			msg = drAddAction.sucessMessage();
+			msg = drAddAction.successMessage();
 		} else if (action.equals(FormActions.EDIT.name())) {
 
 			DRFellowLink drEditAction = DRGeneralViewUtils.readAnnotation(dtoClass, FormActions.EDIT);
@@ -87,7 +87,7 @@ public class DRGenericController extends DRGenericControllerAbstract {
 			url = drEditAction.url();
 			componentPath = drEditAction.componentPath();
 			dtoIN.setSessionParams(DRGeneralViewUtils.buildMapSessionParams(drEditAction.sessionParams(), sessionScope));
-			msg = drEditAction.sucessMessage();
+			msg = drEditAction.successMessage();
 		}
 		Class modelInvoker = Class.forName(invokerArray[0]);
 		Object facade = modelInvoker.newInstance();

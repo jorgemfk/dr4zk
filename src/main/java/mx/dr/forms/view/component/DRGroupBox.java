@@ -50,10 +50,6 @@ public @interface DRGroupBox {
 	 **/
      boolean open() default true;
 	 /**
-	 * titulo del grupo de componentes.
-	 **/
-     DRLabel label();
-	 /**
 	 * modo de ser dibujado.
 	 **/
      MOLD mold() default DRGroupBox.MOLD.DEFAULT;

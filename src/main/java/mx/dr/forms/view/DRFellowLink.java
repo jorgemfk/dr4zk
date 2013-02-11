@@ -73,7 +73,7 @@ public @interface DRFellowLink{
 	* mensaje a mostrar cuando se realice la accion de forma exitosa.
 	* @return mensaje.
 	**/
-    DRMessage sucessMessage() default @DRMessage;
+    DRMessage successMessage() default @DRMessage;
     //edit list
 	/**
 	* para el caso exclusivo de una accion en la lista de resultados, se trata de la etiqueta que debera tener el enlace.
