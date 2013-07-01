@@ -45,7 +45,7 @@ public @interface DRField {
 	*
 	* enumeracion que representa el tipo de operacion de busqueda que puede manejar un atributo.
 	**/
-    public enum Operator { LIKE, EQUALS };
+    public enum Operator { LIKE, EQUALS, GTEQ, GT, LTEQ, LT, NOT_EQUALS, NULL, NOT_NULL };
 	/**
 	* acciones a las que debera responder 
 	* @return conjunto de acciones.
