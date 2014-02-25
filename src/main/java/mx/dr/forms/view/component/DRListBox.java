@@ -81,4 +81,8 @@ public @interface DRListBox {
 	* clase de estilos css.
 	**/
     String sclass() default "";
+    /**
+     * page size / tamano de pagina
+     */
+    int pageSize() default 0;
 }

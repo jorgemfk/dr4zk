@@ -56,11 +56,15 @@ public class DRListBoxRender implements IDRRendereable<DRListBox, Object> {
         alist.setMold(drListBox.mold().name().toLowerCase());
         alist.setItemRenderer(drListBox.itemRenderer().getName());
         alist.setSclass(drListBox.sclass());
+        
         if (!drListBox.id().equals(DefaultValues.NONE)) {
             alist.setId(drListBox.id());
             alist.setVisible(false);
         } else {
             alist.setId(name);
+        }
+        if (drListBox.pageSize()>0){
+        	alist.setPageSize(drListBox.pageSize());
         }
         if (drListBox.header()) {
             alist.appendChild(new Listhead());
